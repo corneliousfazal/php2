@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+</head>
+<body>
+<form method="post" action="login.php" id="login">
+<input type="text" name="n" placeholder="name">
+    <input type="password" name="p" placeholder="password">
+
+    <input type="submit" value="Login">
+<div id="error"></div>
+</form>
+</body>
+</html>
+<script>
+   $(function () {
+        $("#login").submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "login.php",
+                data: $(this).serialize(),
+                success:function (respone) {
+                    if(respone == "<ul><li>login</li></ul>"){
+                        location.href = "index.php";
+                    }else {
+                    $("#error").html(respone);
+                    }
+                }
+            });
+        });
+    });
+</script>
